@@ -1,0 +1,142 @@
+set i 0
+sensor siliconId @silicon @id
+sensor graphiteId @graphite @id
+sensor leadId @lead @id
+sensor metaglassId @metaglass @id
+sensor coalId @coal @id
+sensor titaniumId @titanium @id
+sensor plastaniumId @plastanium @id
+sensor thoriumId @thorium @id
+sensor phaseFabricId @phase-fabric @id
+sensor surgeAlloyId @surge-alloy @id
+sensor pyratiteId @pyratite @id
+sensor blastCompoundId @blast-compound @id
+set silicon 0
+set graphite 0
+set lead 0
+set metaglass 0
+set coal 0
+set titanium 0
+set plastanium 0
+set thorium 0
+set phaseFabric 0
+set surgeAlloy 0
+set pyratite 0
+set blastCompound 0
+jump 66 greaterThanEq i @links
+getlink factory i
+op add i i 1
+sensor enabled factory @enabled
+sensor type factory @type
+jump 25 equal enabled false
+sensor config factory @config
+jump 25 equal config null
+jump 37 equal type @ground-factory
+jump 50 equal type @air-factory
+jump 57 equal type @naval-factory
+jump 25 always x false
+jump 41 notEqual config @dagger
+op add silicon silicon 67
+op add lead lead 67
+jump 25 always x false
+jump 45 notEqual config @crawler
+op add silicon silicon 80
+op add coal coal 100
+jump 25 always x false
+jump 25 notEqual config @nova
+op add silicon silicon 75
+op add lead lead 50
+op add titanium titanium 50
+jump 25 always x false
+jump 53 notEqual config @flare
+op add silicon silicon 100
+jump 25 always x false
+jump 25 notEqual config @mono
+op add silicon silicon 86
+op add lead lead 43
+jump 25 always x false
+jump 61 notEqual config @risso
+op add silicon silicon 44
+op add metaglass metaglass 78
+jump 25 always x false
+jump 25 notEqual config @retusa
+op add silicon silicon 30
+op add metaglass metaglass 50
+op add titanium titanium 40
+jump 25 always x false
+set i 0
+jump 72 equal silicon 0
+write siliconId cell1 i
+op add i i 1
+write silicon cell1 i
+op add i i 1
+jump 77 equal graphite 0
+write graphiteId cell1 i
+op add i i 1
+write graphite cell1 i
+op add i i 1
+jump 82 equal lead 0
+write leadId cell1 i
+op add i i 1
+write lead cell1 i
+op add i i 1
+jump 87 equal metaglass 0
+write metaglassId cell1 i
+op add i i 1
+write metaglass cell1 i
+op add i i 1
+jump 92 equal coal 0
+write coalId cell1 i
+op add i i 1
+write coal cell1 i
+op add i i 1
+jump 97 equal titanium 0
+write titaniumId cell1 i
+op add i i 1
+write titanium cell1 i
+op add i i 1
+jump 102 equal plastanium 0
+write plastaniumId cell1 i
+op add i i 1
+write plastanium cell1 i
+op add i i 1
+jump 107 equal thorium 0
+write thoriumId cell1 i
+op add i i 1
+write thorium cell1 i
+op add i i 1
+jump 112 equal phaseFabric 0
+write phaseFabricId cell1 i
+op add i i 1
+write phaseFabric cell1 i
+op add i i 1
+jump 117 equal surgeAlloy 0
+write surgeAlloyId cell1 i
+op add i i 1
+write surgeAlloy cell1 i
+op add i i 1
+jump 122 equal pyratite 0
+write pyratiteId cell1 i
+op add i i 1
+write pyratite cell1 i
+op add i i 1
+jump 127 equal blastCompound 0
+write blastCompoundId cell1 i
+op add i i 1
+write blastCompound cell1 i
+op add i i 1
+write -1 cell1 i
+set i 0
+read tid cell1 i
+jump 140 strictEqual tid -1
+op add i i 1
+read value cell1 i
+op add i i 1
+lookup item tName tid
+print tName
+print " - "
+print value
+print "\n"
+jump 129 always x false
+printflush message1
+wait 1

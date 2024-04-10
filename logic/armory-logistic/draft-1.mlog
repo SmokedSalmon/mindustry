@@ -1,0 +1,40 @@
+set i 0
+sensor tid @titanium @id
+set temp 50
+write tid cell1 i
+op add i i 1
+write temp cell1 i
+op add i i 1
+sensor tid @graphite @id
+set temp 50
+write tid cell1 i
+op add i i 1
+write temp cell1 i
+op add i i 1
+sensor tid @lead @id
+set temp 50
+write tid cell1 i
+op add i i 1
+write temp cell1 i
+op add i i 1
+sensor tid @silicon @id
+set temp 50
+write tid cell1 i
+op add i i 1
+write temp cell1 i
+op add i i 1
+write -1 cell1 i
+set i 0
+read tid cell1 i
+jump 38 strictEqual tid -1
+op add i i 1
+read value cell1 i
+op add i i 1
+lookup item tName tid
+print tName
+print " - "
+print value
+print "\n"
+jump 27 always x false
+printflush message1
+wait 2

@@ -1,0 +1,53 @@
+set i 0
+set i2 0
+set pTotal 0
+read tid cell2 i
+jump 22 strictEqual tid -1
+lookup item tName tid
+op add i i 1
+read value cell2 i
+op add i i 1
+sensor count shard1 tName
+jump 3 lessThanEq count 0
+op add pTotal pTotal value
+set pivot pTotal
+write pivot cell1 i2
+op add i2 i2 1
+write tid cell1 i2
+op add i2 i2 1
+print tName
+print " - "
+print value
+print "\n"
+jump 3 always x false
+write -1 cell1 i2
+print "======\n"
+set i 0
+read pivot cell1 i
+jump 36 strictEqual pivot -1
+op add i i 1
+read tid cell1 i
+op add i i 1
+lookup item tName tid
+print pivot
+print " -> "
+print tid
+print "\n"
+jump 25 always x false
+op rand picked pTotal b
+op floor picked picked b
+set i 0
+read pivot cell1 i
+jump 49 strictEqual pivot -1
+op add i i 1
+read tid cell1 i
+op add i i 1
+jump 39 greaterThanEq picked pivot
+print "Lands at "
+print picked
+print ", choosing -> "
+print tid
+printflush message1
+lookup item type tid
+control config unloader1 type 0 0 0
+wait .05
