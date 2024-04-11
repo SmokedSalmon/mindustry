@@ -23,23 +23,29 @@ set phaseFabric 0
 set surgeAlloy 0
 set pyratite 0
 set blastCompound 0
-jump 66 greaterThanEq i @links
+jump 92 greaterThanEq i @links
 getlink factory i
 op add i i 1
 sensor enabled factory @enabled
 sensor type factory @type
 jump 25 equal enabled false
+sensor sittingUnit factory @payloadCount
 sensor config factory @config
-jump 25 equal config null
-jump 37 equal type @ground-factory
-jump 50 equal type @air-factory
-jump 57 equal type @naval-factory
+jump 41 equal type @ground-factory
+jump 56 equal type @air-factory
+jump 65 equal type @naval-factory
+jump 76 equal type @additive-reconstructor
+jump 79 equal type @multiplicative-reconstructor
+jump 83 equal type @exponential-reconstructor
+jump 87 equal type @tetrative-reconstructor
 jump 25 always x false
-jump 41 notEqual config @dagger
+jump 25 equal config null
+jump 25 greaterThan sittingUnit 0
+jump 47 notEqual config @dagger
 op add silicon silicon 67
 op add lead lead 67
 jump 25 always x false
-jump 45 notEqual config @crawler
+jump 51 notEqual config @crawler
 op add silicon silicon 80
 op add coal coal 100
 jump 25 always x false
@@ -48,14 +54,18 @@ op add silicon silicon 75
 op add lead lead 50
 op add titanium titanium 50
 jump 25 always x false
-jump 53 notEqual config @flare
+jump 25 equal config null
+jump 25 greaterThan sittingUnit 0
+jump 61 notEqual config @flare
 op add silicon silicon 100
 jump 25 always x false
 jump 25 notEqual config @mono
 op add silicon silicon 86
 op add lead lead 43
 jump 25 always x false
-jump 61 notEqual config @risso
+jump 25 equal config null
+jump 25 greaterThan sittingUnit 0
+jump 71 notEqual config @risso
 op add silicon silicon 44
 op add metaglass metaglass 78
 jump 25 always x false
@@ -64,71 +74,88 @@ op add silicon silicon 30
 op add metaglass metaglass 50
 op add titanium titanium 40
 jump 25 always x false
+op add silicon silicon 400
+op add graphite graphite 400
+jump 25 always x false
+op add silicon silicon 433
+op add titanium titanium 266
+op add metaglass metaglass 133
+jump 25 always x false
+op add silicon silicon 944
+op add titanium titanium 833
+op add plastanium plastanium 722
+jump 25 always x false
+op add silicon silicon 416
+op add plastanium plastanium 250
+op add surgeAlloy surgeAlloy 208
+op add phaseFabric phaseFabric 140
+jump 25 always x false
 set i 0
-jump 72 equal silicon 0
+jump 98 equal silicon 0
 write siliconId cell1 i
 op add i i 1
 write silicon cell1 i
 op add i i 1
-jump 77 equal graphite 0
+jump 103 equal graphite 0
 write graphiteId cell1 i
 op add i i 1
 write graphite cell1 i
 op add i i 1
-jump 82 equal lead 0
+jump 108 equal lead 0
 write leadId cell1 i
 op add i i 1
 write lead cell1 i
 op add i i 1
-jump 87 equal metaglass 0
+jump 113 equal metaglass 0
 write metaglassId cell1 i
 op add i i 1
 write metaglass cell1 i
 op add i i 1
-jump 92 equal coal 0
+jump 118 equal coal 0
 write coalId cell1 i
 op add i i 1
 write coal cell1 i
 op add i i 1
-jump 97 equal titanium 0
+jump 123 equal titanium 0
 write titaniumId cell1 i
 op add i i 1
 write titanium cell1 i
 op add i i 1
-jump 102 equal plastanium 0
+jump 128 equal plastanium 0
 write plastaniumId cell1 i
 op add i i 1
 write plastanium cell1 i
 op add i i 1
-jump 107 equal thorium 0
+jump 133 equal thorium 0
 write thoriumId cell1 i
 op add i i 1
 write thorium cell1 i
 op add i i 1
-jump 112 equal phaseFabric 0
+jump 138 equal phaseFabric 0
 write phaseFabricId cell1 i
 op add i i 1
 write phaseFabric cell1 i
 op add i i 1
-jump 117 equal surgeAlloy 0
+jump 143 equal surgeAlloy 0
 write surgeAlloyId cell1 i
 op add i i 1
 write surgeAlloy cell1 i
 op add i i 1
-jump 122 equal pyratite 0
+jump 148 equal pyratite 0
 write pyratiteId cell1 i
 op add i i 1
 write pyratite cell1 i
 op add i i 1
-jump 127 equal blastCompound 0
+jump 153 equal blastCompound 0
 write blastCompoundId cell1 i
 op add i i 1
 write blastCompound cell1 i
 op add i i 1
 write -1 cell1 i
 set i 0
+jump 167 greaterThanEq i 64
 read tid cell1 i
-jump 140 strictEqual tid -1
+jump 167 strictEqual tid -1
 op add i i 1
 read value cell1 i
 op add i i 1
@@ -137,6 +164,5 @@ print tName
 print " - "
 print value
 print "\n"
-jump 129 always x false
+jump 155 always x false
 printflush message1
-wait 1

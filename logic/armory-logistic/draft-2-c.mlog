@@ -1,14 +1,24 @@
 set i 0
 set i2 0
 set pTotal 0
+jump 0 greaterThanEq i 64
 read tid cell2 i
-jump 18 strictEqual tid -1
+jump 28 strictEqual tid -1
 lookup item tName tid
 op add i i 1
 read value cell2 i
 op add i i 1
 sensor count shard1 tName
-jump 3 lessThanEq count 0
+jump 21 greaterThan count 0
+sensor count foundation1 tName
+jump 21 greaterThan count 0
+sensor count nucleus1 tName
+jump 21 greaterThan count 0
+sensor count container1 tName
+jump 21 greaterThan count 0
+sensor count vault1 tName
+jump 21 greaterThan count 0
+jump 3 always count 0
 op add pTotal pTotal value
 set pivot pTotal
 write pivot cell1 i2
@@ -18,22 +28,31 @@ op add i2 i2 1
 jump 3 always x false
 write -1 cell1 i2
 set i 0
+jump 0 greaterThanEq i 64
 read pivot cell1 i
-jump 27 strictEqual pivot -1
+jump 38 strictEqual pivot -1
 op add i i 1
 read tid cell1 i
 op add i i 1
 lookup item tName tid
-jump 20 always x false
+jump 30 always x false
 op rand picked pTotal b
 op floor picked picked b
 set i 0
+jump 0 greaterThanEq i 64
 read pivot cell1 i
-jump 36 strictEqual pivot -1
+jump 48 strictEqual pivot -1
 op add i i 1
 read tid cell1 i
 op add i i 1
-jump 30 greaterThanEq picked pivot
+jump 41 greaterThanEq picked pivot
 lookup item type tid
+jump 55 lessThanEq i 0
 control config unloader1 type 0 0 0
-wait .05
+control config unloader2 type 0 0 0
+control enabled unloader1 true 0 0 0
+control enabled unloader2 true 0 0 0
+jump 57 always x false
+control enabled unloader1 false 0 0 0
+control enabled unloader2 false 0 0 0
+wait .1
