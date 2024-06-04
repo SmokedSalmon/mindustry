@@ -1,0 +1,18 @@
+sensor pressed switch1 @enabled
+jump 3 equal pressed true
+end
+set i 0
+jump 16 greaterThanEq i @links
+getlink linked i
+op add i i 1
+sensor type linked @type
+sensor config linked @config
+jump 4 equal config null
+
+jump 14 strictEqual type @ground-factory
+jump 14 strictEqual type @air-factory
+jump 14 strictEqual type @naval-factory
+jump 15 always x false
+control config linked @alpha 0 0 0
+jump 4 always x false
+control enabled switch1 false 0 0 0

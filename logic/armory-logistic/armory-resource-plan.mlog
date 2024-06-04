@@ -1,0 +1,370 @@
+jump 3 notEqual cell1 null
+print "Memory Cell is missing\n"
+jump 337 always cell1 null
+sensor siliconId @silicon @id
+sensor graphiteId @graphite @id
+sensor leadId @lead @id
+sensor metaglassId @metaglass @id
+sensor coalId @coal @id
+sensor titaniumId @titanium @id
+sensor plastaniumId @plastanium @id
+sensor thoriumId @thorium @id
+sensor phaseFabricId @phase-fabric @id
+sensor surgeAlloyId @surge-alloy @id
+sensor pyratiteId @pyratite @id
+sensor blastCompoundId @blast-compound @id
+set silicon 0
+set graphite 0
+set lead 0
+set metaglass 0
+set coal 0
+set titanium 0
+set plastanium 0
+set thorium 0
+set phaseFabric 0
+set surgeAlloy 0
+set pyratite 0
+set blastCompound 0
+set plant factory1
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 4
+jump 340 always enabled false
+sensor outBlocked router1 @payloadCount
+op add @fDoneR @counter 1
+jump 89 always enabled false
+set plant factory2
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 4
+jump 340 always enabled false
+sensor outBlocked router1 @payloadCount
+op add @fDoneR @counter 1
+jump 89 always enabled false
+set plant factory3
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 4
+jump 340 always enabled false
+sensor outBlocked router1 @payloadCount
+op add @fDoneR @counter 1
+jump 89 always enabled false
+set plant factory4
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 4
+jump 340 always enabled false
+sensor outBlocked router1 @payloadCount
+op add @fDoneR @counter 1
+jump 89 always enabled false
+set plant reconstructor1
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 5
+jump 340 always enabled false
+sensor inputQueued router2 @payloadCount
+sensor outBlocked router4 @payloadCount
+op add @rcDoneR @counter 1
+jump 192 always enabled false
+set plant reconstructor2
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 5
+jump 340 always enabled false
+sensor inputQueued router3 @payloadCount
+sensor outBlocked router5 @payloadCount
+op add @rcDoneR @counter 1
+jump 192 always enabled false
+set plant reconstructor3
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 5
+jump 340 always enabled false
+sensor inputQueued conveyor1 @payloadCount
+sensor outBlocked null @payloadCount
+op add @rcDoneR @counter 1
+jump 192 always enabled false
+set plant reconstructor4
+op add @plantCommonR @counter 2
+op add @skipPlantR @counter 5
+jump 340 always enabled false
+sensor inputQueued conveyor2 @payloadCount
+sensor outBlocked null @payloadCount
+op add @rcDoneR @counter 1
+jump 192 always enabled false
+jump 261 always enabled false
+end
+set inputQueued true
+set sittingUnit 1
+jump 96 equal type @ground-factory
+jump 139 equal type @air-factory
+jump 161 equal type @naval-factory
+set @counter @fDoneR
+end
+jump 109 notEqual config @dagger
+sensor siliconC plant @silicon
+sensor leadC plant @lead
+jump 102 lessThan siliconC 20
+jump 102 lessThan leadC 20
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 67 weight
+op mul addLead 67 weight
+op add silicon silicon addSilicon
+op add lead lead addLead
+set @counter @fDoneR
+jump 122 notEqual config @crawler
+sensor siliconC plant @silicon
+sensor coalC plant @coal
+jump 115 lessThan siliconC 16
+jump 115 lessThan coalC 20
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 80 weight
+op mul addCoal 100 weight
+op add silicon silicon addSilicon
+op add coal coal addCoal
+set @counter @fDoneR
+jump 138 notEqual config @nova
+sensor siliconC plant @silicon
+sensor leadC plant @lead
+sensor tiC plant @titanium
+jump 130 lessThan siliconC 60
+jump 130 lessThan leadC 40
+jump 130 lessThan tiC 40
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 75 weight
+op mul addLead 50 weight
+op mul addTi 50 weight
+op add silicon silicon addSilicon
+op add lead lead addLead
+op add titanium titanium addTi
+set @counter @fDoneR
+jump 148 notEqual config @flare
+sensor siliconC plant @silicon
+jump 143 lessThan siliconC 30
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 100 weight
+op add silicon silicon addSilicon
+set @counter @fDoneR
+jump 160 notEqual config @mono
+sensor siliconC plant @silicon
+sensor leadC plant @lead
+jump 154 lessThan siliconC 60
+jump 154 lessThan leadC 30
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 86 weight
+op mul addLead 43 weight
+op add silicon silicon addSilicon
+op add lead lead addLead
+set @counter @fDoneR
+jump 174 notEqual config @risso
+sensor siliconC plant @silicon
+sensor mgC plant @metaglass
+jump 167 lessThan siliconC 40
+jump 167 lessThan mgC 70
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 44 weight
+op mul addMG 78 weight
+op add silicon silicon addSilicon
+op add metaglass metaglass addMG
+set @counter @fDoneR
+jump 190 notEqual config @retusa
+sensor siliconC plant @silicon
+sensor mgC plant @metaglass
+sensor tiC plant @titanium
+jump 182 lessThan siliconC 30
+jump 182 lessThan mgC 50
+jump 182 lessThan tiC 40
+set @counter @fDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 30 weight
+op mul addMG 50 weight
+op mul addTi 40 weight
+op add silicon silicon addSilicon
+op add metaglass metaglass addMG
+op add titanium titanium addTi
+set @counter @fDoneR
+end
+jump 205 notEqual type @additive-reconstructor
+sensor siliconC plant @silicon
+sensor graphiteC plant @graphite
+jump 198 lessThan siliconC 80
+jump 198 lessThan graphiteC 80
+set @counter @rcDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 400 weight
+op mul addGraphite 400 weight
+op add silicon silicon addSilicon
+op add graphite graphite addGraphite
+set @counter @rcDoneR
+jump 222 notEqual type @multiplicative-reconstructor
+sensor siliconC plant @silicon
+sensor mgC plant @metaglass
+sensor tiC plant @titanium
+jump 213 lessThan siliconC 260
+jump 213 lessThan mgC 80
+jump 213 lessThan tiC 160
+set @counter @rcDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 433 weight
+op mul addMG 133 weight
+op mul addTi 266 weight
+op add silicon silicon addSilicon
+op add metaglass metaglass addMG
+op add titanium titanium addTi
+set @counter @rcDoneR
+jump 239 notEqual type @exponential-reconstructor
+sensor siliconC plant @silicon
+sensor tiC plant @titanium
+sensor pC plant @plastanium
+jump 230 lessThan siliconC 1700
+jump 230 lessThan tiC 1500
+jump 230 lessThan pC 1300
+set @counter @rcDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 944 weight
+op mul addTi 833 weight
+op mul addP 722 weight
+op add silicon silicon addSilicon
+op add titanium titanium addTi
+op add plastanium plastanium addP
+set @counter @rcDoneR
+jump 259 notEqual type @tetrative-reconstructor
+sensor siliconC plant @silicon
+sensor pC plant @plastanium
+sensor saC plant @surge-alloy
+sensor pfC plant @phase-fabric
+jump 249 lessThan siliconC 2000
+jump 249 lessThan pC 1200
+jump 249 lessThan saC 1000
+jump 249 lessThan pfC 700
+set @counter @rcDoneR
+op add @pCheckR @counter 1
+jump 350 always x false
+op mul addSilicon 416 weight
+op mul addP 250 weight
+op mul addSA 208 weight
+op mul addPF 146 weight
+op add silicon silicon addSilicon
+op add plastanium plastanium addP
+op add surgeAlloy surgeAlloy addSA
+op add phaseFabric phaseFabric addPF
+set @counter @rcDoneR
+end
+set i 0
+jump 267 equal silicon 0
+write siliconId cell1 i
+op add i i 1
+write silicon cell1 i
+op add i i 1
+jump 272 equal graphite 0
+write graphiteId cell1 i
+op add i i 1
+write graphite cell1 i
+op add i i 1
+jump 277 equal lead 0
+write leadId cell1 i
+op add i i 1
+write lead cell1 i
+op add i i 1
+jump 282 equal metaglass 0
+write metaglassId cell1 i
+op add i i 1
+write metaglass cell1 i
+op add i i 1
+jump 287 equal coal 0
+write coalId cell1 i
+op add i i 1
+write coal cell1 i
+op add i i 1
+jump 292 equal titanium 0
+write titaniumId cell1 i
+op add i i 1
+write titanium cell1 i
+op add i i 1
+jump 297 equal plastanium 0
+write plastaniumId cell1 i
+op add i i 1
+write plastanium cell1 i
+op add i i 1
+jump 302 equal thorium 0
+write thoriumId cell1 i
+op add i i 1
+write thorium cell1 i
+op add i i 1
+jump 307 equal phaseFabric 0
+write phaseFabricId cell1 i
+op add i i 1
+write phaseFabric cell1 i
+op add i i 1
+jump 312 equal surgeAlloy 0
+write surgeAlloyId cell1 i
+op add i i 1
+write surgeAlloy cell1 i
+op add i i 1
+jump 317 equal pyratite 0
+write pyratiteId cell1 i
+op add i i 1
+write pyratite cell1 i
+op add i i 1
+jump 322 equal blastCompound 0
+write blastCompoundId cell1 i
+op add i i 1
+write blastCompound cell1 i
+op add i i 1
+write -1 cell1 i
+set i 0
+jump 336 greaterThanEq i 64
+read tid cell1 i
+jump 336 strictEqual tid -1
+op add i i 1
+read value cell1 i
+op add i i 1
+lookup item tName tid
+print tName
+print " - "
+print value
+print "\n"
+jump 324 always x false
+jump 338 greaterThan i 0
+print "Resource requirement = 0"
+printflush message1
+end
+sensor enabled plant @enabled
+sensor powered plant @totalPower
+sensor type plant @type
+sensor config plant @config
+sensor sittingUnit plant @payloadCount
+jump 348 equal enabled false
+jump 348 equal powered false
+set @counter @plantCommonR
+set @counter @skipPlantR
+end
+jump 358 equal sittingUnit 0
+sensor efficiency plant @efficiency
+sensor progress plant @progress
+jump 356 greaterThan efficiency 0
+set weight 1.25
+jump 359 always x false
+set weight 1
+jump 359 always x false
+set weight 0.75
+jump 362 equal outBlocked false
+op sub weight weight 0.25
+jump 364 always x false
+jump 364 equal inputQueued false
+op add weight weight 0.5
+print plant
+print " - "
+print weight
+print "\n"
+set @counter @pCheckR
+end
